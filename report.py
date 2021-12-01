@@ -13,8 +13,8 @@ telephone = "xxx"
 in_or_out = "出校"
 in_or_out_text = "出校 Exit"
 # 进出校事由
-in_or_out_reason_text = "出校科研 Off-campus Research"
-in_or_out_reason = "出校科研"
+in_or_out_reason_text = "出校其他 Other exit reason"
+in_or_out_reason = "出校其他"
 # 事由描述
 description = "吃饭"
 # 校外往来地点
