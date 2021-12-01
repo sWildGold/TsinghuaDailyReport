@@ -16,9 +16,9 @@ in_or_out_text = "出校 Exit"
 in_or_out_reason_text = "出校科研 Off-campus Research"
 in_or_out_reason = "出校科研"
 # 事由描述
-description = "xxx"
+description = "吃饭"
 # 校外往来地点
-destination = "xxx"
+destination = "华源世纪商务楼"
 
 headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
