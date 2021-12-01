@@ -6,7 +6,7 @@ name: TsinghuaDaily Report
 on:
   # 每天北京时间 10点整 (utc+8)自动运行
   schedule:
-    - cron: "12 9 * * *"
+    - cron: "5 * * * *"
 
 jobs:
   submit_report:
