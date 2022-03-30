@@ -52,7 +52,7 @@ class Report(object):
                           "serveID={0}&" \
                           "act=fp/serveapply".format(self.server_id)
 
-        self.common_referer = "https://thos.tsinghua.edu.cn/fp/view?m=fp"
+        self.common_referer = "https://id.tsinghua.edu.cn/do/off/ui/auth/login/form/a585295b8da408afdda9979801383d0c/0?/fp/view?m=fp"
 
         self.form_data = None
 
@@ -108,41 +108,48 @@ class Report(object):
         check_url = "https://thos.tsinghua.edu.cn/fp/fp/serveapply/checkService"
         headers_ = {}
         # headers_ = self.session.headers
-        headers_["Referer"] = self.common_referer
-        headers_["Accept"] = 'text/plain, */*; q=0.01'
+        headers_["Referer"] = "https://thos.tsinghua.edu.cn/fp/view?m=fp"
+        # headers_["path"] = '/fp/fp/serveapply/serveInfo'
+        headers_["Accept"] = 'application/json, text/javascript, */*; q=0.01'
         headers_["Accept-Encoding"] = 'gzip, deflate, br'
         headers_["accept-language"] = 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7'
         headers_["Cache-Control"] = 'no-cache'
         headers_["Origin"] = 'https://thos.tsinghua.edu.cn'
         headers_["X-Requested-With"] = "XMLHttpRequest"
-        headers_["Content-Length"] = '50'
+        headers_["Content-Length"] = '52'
         headers_["content-type"] = 'application/json;charset=UTF-8'
         headers_["pragma"] = 'no-cache'
-        headers_["user-agent"] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+        headers_["user-agent"] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36'
+        headers_["sec-ch-ua"] = 'Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"'
+        headers_["sec-ch-ua-mobile"] = '?0'
+        headers_["sec-ch-ua-platform"] = 'Windows'
+        headers_["sec-fetch-dest"] = 'empty'
+        headers_["sec-fetch-mode"] = 'cors'
+        headers_["sec-fetch-site"] = 'same-origin'
         self.session.headers = headers_
-        res = self.session.post(url=check_url, data=json.dumps({"serveID": self.server_id}))
+        res = self.session.post(url=check_url, data=json.dumps({"serviceID": self.server_id}))
         print(res.text)
-        url_ = "https://thos.tsinghua.edu.cn/fp/fp/serveapply/getServeApply"
+        url_ = "https://thos.tsinghua.edu.cn/fp/fp/serveapply/serveInfo"
 
         headers_ = self.session.headers
         headers_["Accept"] = "application/json, text/javascript, */*; q=0.01"
         headers_["Content-Type"] = "application/json"
-        headers_["Referer"] = self.common_referer
+        headers_["Referer"] = "https://thos.tsinghua.edu.cn/fp/view?m=fp"
         headers_["Origin"] = "https://thos.tsinghua.edu.cn"
         headers_["X-Requested-With"] = "XMLHttpRequest"
-        headers_["Host"] = "thos.tsinghua.edu.cn"
+        # headers_["Host"] = "thos.tsinghua.edu.cn"
 
-        data = {"serveID": self.server_id, "from": "hall"}
+        data = {"serviceID": self.server_id, "from": "hall"}
         try:
             response = self.session.post(url=url_, data=json.dumps(data))
             print(response.status_code)
             result = response.json()
 
-            self.resource_id = result["resource_id"]
-            self.user_id = result["user_id"]
-            self.form_id = result["formID"]
-            self.process_id = result["procID"]
-            self.privilege_id = result["privilegeId"]
+            # self.resource_id = result["resource_id"]
+            # self.user_id = result["user_id"]
+            self.form_id = result["formid"]
+            # self.process_id = result["procID"]
+            # self.privilege_id = result["privilegeId"]
             print("获取服务器参数成功")
         except Exception as e:
             print("获取服务器参数失败", e)
